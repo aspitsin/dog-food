@@ -3,7 +3,7 @@ import Card from "../components/Card/card";
 import "../style.css";
 import dog from './img/banner-dog.png';
 
-export default () => {
+export default ({data}) => {
     return <>
     <div className="container-banner">
         <div className="banner">
@@ -27,6 +27,10 @@ export default () => {
                 </div>
             </div>
         </div>
+    </div>
+    <div className="cards">
+        {data.map((el, i ) => 
+        i < 4 && <Card key={"card_" + i} text={el.name} price={el.price} pictures={el.pictures} wight={el.wight}/>)}
     </div>
     <div className="promo">
         <div className="promo-small">

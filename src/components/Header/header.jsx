@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import Search from "../Search/search";
 import "./header.css";
 
+import burger from "./img/Menu.svg"
+
 export default ({user, setUser, products, setModalActive}) => {
     // const [user, setUser] = useState(localStorage.getItem("user"));
     
@@ -32,7 +34,9 @@ export default ({user, setUser, products, setModalActive}) => {
             {user && <a className="button-primary" href="" onClick={logOut}>Выйти</a>}
         </nav>
         <div className="burger">
-            <button className="burger-icon" onClick={()=>setMobileMenu(true)}></button>
+            <button onClick={()=>setMobileMenu(true)}>
+                    <img className="burger-icon" src={burger} alt="" />
+            </button>
         </div>
         <div className="mobile-menu" style={styleMobileMenu}>
             <div className="mobile-menu-header">

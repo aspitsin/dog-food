@@ -60,7 +60,7 @@ const App = () =>{
         setUser={setUser} 
         products={products} 
         setModalActive={setModalActive}/>
-        <Home />
+        <Home data={goods}/>
         <main>
             {user && <Catalog data={goods}/> }
         </main>

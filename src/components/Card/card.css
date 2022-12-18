@@ -1,5 +1,10 @@
+.cards {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 .card {
     min-width: 200px;
+    max-height: 400px;
     box-shadow: 0 0 5px #2226;
     border-radius: 1em;
     padding: 1em;
@@ -8,7 +13,7 @@
     flex-direction: column;
     justify-content:space-between;
     position: relative;
-    gap: 0.5em;
+    gap: 10px;
     text-align: left;
 }
 .card__heart {
@@ -16,6 +21,11 @@
     top: .5em;
     right: 1em;
     color: crimson;
+}
+
+.card-img-box {
+    margin: 0 auto;
+    overflow: hidden;
 }
 
 .card img {
@@ -26,4 +36,19 @@
 
 .card button {
     align-self: flex-start;
+}
+
+.card-price {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.card-wight {
+    font-size: 14px;
+    color: grey;
+}
+
+.card-name {
+    font-size: 16px;
+    font-weight: 600;
 }

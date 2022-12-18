@@ -3,8 +3,10 @@ import "./card.css";
 
 export default ({text, price, pictures, wight}) => {
     return <div className="card">
+        <div className="card-img-box">
         <img className="card-img" src={pictures}  alt="" />
-        <span className="card-prie">{price} ₽</span>
+        </div>
+        <span className="card-price">{price} ₽</span>
         <span className="card-wight">{wight}</span>
         <span className="card-name">{text}</span>
         <button className="button-primary"> В корзину</button>

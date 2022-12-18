@@ -1,4 +1,6 @@
 header {
+    padding-left: calc(50% - 600px);
+    padding-right: calc(50% - 600px);
     padding-top: 10px;
     background: rgb(255,194,46);
     background: linear-gradient(90deg, rgba(255,194,46,1) 30%, rgba(240,149,21,1) 100%);
@@ -15,8 +17,8 @@ header {
 }
 
 .logo {
-    width: 30px;
-    height: 30px;
+    width: 2.5em;
+    height: 2.5em;
     background: url("./img/logo_min.svg") no-repeat;
     background-size: cover;
 }
@@ -35,13 +37,20 @@ header {
         display: none;
     }
 } 
-.burger-icon {
-    width: 20px;
-    height: 13px;
+
+
+.burger button {
+    background-color: transparent;
     border: none;
-    background: url(/src/components/Header/img/Menu.svg) no-repeat;
-    background-size: auto;
 }
+
+.burger-icon {
+    padding-top: 5px;
+    width: 30px;
+    height: 20px;
+    border: none;
+}
+
 @media (min-width: 480px) {
     .burger {
         display: none;
