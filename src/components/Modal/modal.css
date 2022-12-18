@@ -10,6 +10,7 @@
     align-items: center;
 }
 .modal {
+    position: relative;
     width: 300px;
     background-color: #fff;
     padding: 20px;
@@ -24,20 +25,17 @@
     text-align: center;
 }
 .modal-close {
-    width: 20px;
-    height: 20px;
-    background-color: #222;
-    border-radius: 50%;
-    border: 2px solid;
-    box-sizing: border-box;
     position: absolute;
-    top: -8px;
-    right: -8px;
-    cursor: pointer;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
 }
-.modal-close:hover {
-    background-color: rgb(243, 231, 5);
+
+.modal-close i{
+    font-size: 16px;
 }
+
 form {
     display: grid;
     gap: 10px;
@@ -53,16 +51,18 @@ input {
     outline: none;
 }
 input:focus {
-    border-color: rgb(243, 231, 5);
+    border-color: rgb(255,194,46);
 }
 button.btn {
     border: none;
     height: 30px;
     border-radius: 10px;
-    background-color: rgb(243, 231, 5);
+    background-color: rgb(255,194,46);
+    color: #333333;
 }
 button.link {
     background-color: transparent;
-    border: 1px solid rgb(243, 231, 5);
+    border: 1px solid rgb(255,194,46);
     box-sizing: border-box;
+    color: #333333;
 }

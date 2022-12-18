@@ -11,7 +11,8 @@ export default ({isActive, setState, api, setToken}) => {
     }
     return <div className="modal-container" style={style}>
         <div className="modal">
-        <div className="modal-close" onClick={()=>setState(false)}></div>
+            <button className="modal-close" onClick={()=>setState(false)}>
+                <i class="fa fa-solid fa-xmark"></i></button>
         <h2>{auth ? "Войти" : "Зарегестрироваться"}</h2>
         {auth 
             ? 

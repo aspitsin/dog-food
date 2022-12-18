@@ -50,8 +50,7 @@ const App = () =>{
             })
         }
     }, [api])
-
-    console.log(goods);
+    
     return (
     <>
     <div className="container">
