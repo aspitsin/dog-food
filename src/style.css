@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700&display=swap');
+
+:root {
+    --main-bg-color: fff;
+    --primary-color: rgb(255,194,46);
+
+}
+body {
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--main-bg-color);
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1 {
+    margin: 0;
+}
+.container {
+    min-height: 100vh;
+}
+.container>* {
+    padding-left: calc(50% - 600px);
+    padding-right: calc(50% - 600px);
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2em;
+}
+
+@media (max-width: 1260px) {
+    .container>* {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .cards {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .container>* {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+.container-banner {
+    background: rgb(255,194,46);
+    background: linear-gradient(90deg, rgba(255,194,46,1) 30%, rgba(240,149,21,1) 100%);
+}
+.banner {
+    min-height: 350px;
+    display: flex;
+    max-width: 980px;
+    margin: auto;
+}
+
+.right-side {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.left-side {
+    background: url('./pages/img/banner-dog.png') no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-size: contain;
+}
+@media (min-width: 768px) {
+    .container-banner {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    .left-side, .right-side {
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 50%;
+        max-width: 50%;
+    }
+}
+
+.promo {
+    max-width: 980px;
+    margin: 20px auto;
+} 
+
+.promo-small {
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.promo-block {
+    max-height: 200px;
+    padding: 20px;
+    border-radius: 5px;
+    background: rgb(255,194,46);
+    background: linear-gradient(90deg, rgba(255,194,46,1) 30%, rgba(240,149,21,1) 100%);
+    box-shadow: 0 0 5px #2226;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+}
+
+.promo-small .promo-block {
+    width: 100%;
+}
+
+.promo-left {
+    position: relative;
+}
+
+.promo-left img {
+    width: 70%;
+    position: absolute;
+    right: 30%;
+    top: -20%;
+}
+
+.button-primary {
+    text-align: center;
+    background: rgb(255,194,46);
+    background: linear-gradient(90deg, rgba(255,194,46,1) 30%, rgba(240,149,21,1) 100%);
+    border-radius: 20px;
+    text-decoration: none;
+    padding: 10px 18px;
+    font-size: 16px;
+
+    border: none;
+}
+
+.button-white {
+    text-align: center;
+    border-radius: 20px;
+    text-decoration: none;
+    padding: 10px 18px;
+    font-size: 16px;
+    border: none;
+}
+
+.button-primary:hover {
+    background: rgb(255,250,241); 
+}
