@@ -2,20 +2,28 @@ import React from "react";
 import Card from "../components/Card/card";
 import "../style.css";
 import dog from './img/banner-dog.png';
+import { Link } from "react-router-dom";
+import {Box, Container} from '@mui/material'
+import { width } from "@mui/system";
 
-export default ({data}) => {
+export default ({goods}) => {
     return <>
-    <div className="container-banner">
+    <Box className="home-container">
+        <Container maxWidth="xl">
         <div className="banner">
         <div className="right-side">
             <h1>Крафтовые лакомства для собак</h1>
             <p>Всегда свежие лакомства ручной работы с доставкой по России</p>
-            <button className="button-white">Каталог</button>
+            <Link to="/catalog">
+                <button className="button-white" >Каталог</button>
+            </Link>
         </div>
         <div className="left-side">
         </div>
         </div>
-    </div>
+        </Container>
+    </Box>
+  
     <div className="promo">
     <div className="promo-big">
             <div className="promo-block">
@@ -28,10 +36,13 @@ export default ({data}) => {
             </div>
         </div>
     </div>
+    <Container maxWidth="lg">
     <div className="cards">
-        {data.map((el, i ) => 
+        {goods.map((el, i ) => 
         i < 4 && <Card key={"card_" + i} text={el.name} price={el.price} pictures={el.pictures} wight={el.wight}/>)}
     </div>
+    </Container>
+    
     <div className="promo">
         <div className="promo-small">
             <div className="promo-block">

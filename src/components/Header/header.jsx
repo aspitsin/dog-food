@@ -1,57 +1,52 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import Search from "../Search/search";
 import "./header.css";
+import { Link } from "react-router-dom";
+import Ctx from "../../Ctx";
 
 import burger from "./img/Menu.svg"
 
-export default ({user, setUser, products, setModalActive}) => {
-    // const [user, setUser] = useState(localStorage.getItem("user"));
-    
+import { AppBar, Container, Toolbar, Box, Stack, IconButton, Avatar, Menu, MenuItem, Typography, Button, Fab} from "@mui/material";
+import PetsIcon from '@mui/icons-material/Pets';
+import AddIcon from '@mui/icons-material/Add';
+ 
+export default () => {
+    const {user, setUser, setModalActive}  = useContext(Ctx);
+
     const logIn = (e) => {
         e.preventDefault();
-        // let name = prompt("Как вас зовут");
-        // if(name){
-        //     setUser(name);
-        // }
         setModalActive(prev => !prev);
         setMobileMenu(false);
     }
     const logOut = (e) => {
         e.preventDefault();
-        localStorage.removeItem("user");
         setUser("");
+        localStorage.removeItem("user");
     }
     const [isActiveMenu, setMobileMenu] = useState(false);
     let styleMobileMenu = {
         display: isActiveMenu && "block",
     }
-    return <header>
-        <div className="logo"></div>
-        <Search data={products}/>
-        <nav className="menu">
-            {user && <a href="">{user}</a>}
-            {!user && <a className="button-primary" href="" onClick={logIn} >Войти</a>}
-            {user && <a className="button-primary" href="" onClick={logOut}>Выйти</a>}
-        </nav>
-        <div className="burger">
-            <button onClick={()=>setMobileMenu(true)}>
-                    <img className="burger-icon" src={burger} alt="" />
-            </button>
-        </div>
-        <div className="mobile-menu" style={styleMobileMenu}>
-            <div className="mobile-menu-header">
-                <button className="mobile-menu-close" onClick={()=>setMobileMenu(false)}>
-                    <i class="fa fa-solid fa-xmark"></i>
-                </button>
-                {user && <a href="">{user}</a>}
-                {!user && <a className="button-primary" href="" onClick={logIn}>Войти</a>}
-                {user && <a className="button-primary" href="" onClick={logOut}>Выйти</a>}
-            </div>
-            <nav className="mobile-menu-nav">
-                <li>Главная страница</li>
-                <li>Каталог</li>
-            </nav>
-            
-        </div>
-    </header>
+
+  
+
+    return <AppBar position="static">
+        <Container maxWidth="xl">
+             <Toolbar disableGutters sx={{justifyContent:"space-between"}}>
+                <Link to="/"><PetsIcon sx={{ mr: 1, ml: 1 }} /></Link>
+             
+                    <Search />
+    
+                    <Stack direction="row">
+                    {user && user.name && <Fab color="primary" size="small" component={Link} to="/addForm">
+                        <AddIcon />
+                    </Fab>}
+
+                    {user && user.name && <Button component={Link} to="/profile">{user.name}</Button>}
+                    {!user && <Button onClick={logIn}>Войти</Button>}
+                    {user && <Button onClick={logOut}>Выйти</Button>}
+                    </Stack>
+            </Toolbar>
+        </Container>
+    </AppBar>
 }

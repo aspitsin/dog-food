@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import Ctx from "../../Ctx";
 
-export default ({changeAuth, api, close, setToken}) => {
+export default ({changeAuth, close}) => {
+    const {api, setToken} = useContext(Ctx);
     const [inp1, setInp1] = useState("");
     const [pass1, setPass1] = useState(""); 
   
@@ -10,22 +12,18 @@ export default ({changeAuth, api, close, setToken}) => {
             email: inp1,
             password: pass1,
         }
-        console.log(body);
         api.signIn(body)
             .then(res => res.json())
             .then(data => {
+                // Не забыть отловить сообщение с ошибкой
                 console.log(data);
-                api.signIn(body)
-                .then(res => res.json())
-                .then(data => {
-                        localStorage.setItem("user", data.data.name);
-                        localStorage.setItem("token", data.token);
-                        setToken(data.token);
-                })
+                localStorage.setItem("user", JSON.stringify(data.data));
+                localStorage.setItem("token", data.token);
+                setToken(data.token);
                 setInp1("");
                 setPass1("");
                 close(false);
-        })
+            })
     }
 
     return <form onSubmit={sendForm}>

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
+import {Routes, Route} from "react-router-dom";
+
 import "./style.css";
-import products from "./assets/data.json";
 
 import Header from "./components/Header/header";
 import Footer from "./components/Footer/footer";
@@ -8,30 +9,35 @@ import Modal from "./components/Modal/modal";
 
 import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
+import Profile from "./pages/Profile";
+import Product from "./pages/Product";
+import AddForm from "./pages/AddForm";
 
 import { Api } from "./Api";
-
+import Ctx from "./Ctx";
 
 const App = () =>{
-    const [user, setUser] = useState(localStorage.getItem("user"))
-    const [token, setToken] = useState(localStorage.getItem("token"))
+    let usr = localStorage.getItem("user");
+    if (usr) {
+        usr = JSON.parse(usr);
+    }
+    const [user, setUser] = useState("usr");
+    const [token, setToken] = useState(localStorage.getItem("token"));
     const [modalActive, setModalActive] = useState(false);
     const [api, setApi] = useState(new Api(token));
     const [goods, setGoods] = useState([]);
+    const [searchData, setSearchData] = useState(goods);
 
-    useEffect(() => {
-        if(token) {
-            api.getProducts()
-                .then(res => res.json())
-                .then(data => {
-                    setGoods(data.products);
-                })
-        }
-    }, [])
+
+  
 
     useEffect(() => {
         setApi(new Api(token));
-        setUser(localStorage.getItem("user"));
+        let usr = localStorage.getItem("user");
+        if (usr) {
+            usr = JSON.parse(usr);
+        }
+        setUser(usr);
     }, [token]);
 
     useEffect(() => {
@@ -49,25 +55,49 @@ const App = () =>{
                 setGoods(data.products);
             })
         }
-    }, [api])
+    }, [api]);
     
+    useEffect(()=>{
+        setSearchData(goods)
+    }, [goods]);
+
+
     return (
-    <>
+        <Ctx.Provider value={{
+            user: user,
+            token: token,
+            api: api,
+            modalActive: modalActive,
+            goods: goods,
+            searchData: searchData,
+            setUser: setUser,
+            setToken: setToken,
+            setApi: setApi,
+            setGoods: setGoods,
+            setModalActive: setModalActive,
+            setSearchData: setSearchData,
+        }}>
     <div className="container">
         <Header 
-        user={user} 
-        setUser={setUser} 
-        products={products} 
-        setModalActive={setModalActive}/>
-        <Home data={goods}/>
+            goods={goods}
+            searchData={searchData}
+            setSearchData={setSearchData}
+            setModalActive={setModalActive}
+        />
         <main>
-            {user && <Catalog data={goods}/> }
+            <Routes>
+                <Route path="/" element={<Home goods={goods}/>}/>
+                <Route path="/catalog" element={<Catalog goods={searchData} searchData={searchData}/>}/>
+                <Route path="/profile" element={<Profile />}></Route>
+                <Route path="/catalog/:id" element={<Product/>}></Route>
+                <Route path="/addForm" element={<AddForm/>}></Route>
+            </Routes>
         </main>
         
         <Footer/>
     </div>
-    <Modal isActive={modalActive} setState={setModalActive} api={api} setToken={setToken}/>
-    </>
+    <Modal />
+    </Ctx.Provider>
     )
 }
 

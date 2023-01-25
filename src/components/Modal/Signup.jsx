@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import Ctx from "../../Ctx";
 
-export default ({changeAuth, api, close, setToken}) => {
+export default ({changeAuth, close}) => {
+    const {api, setToken} = useContext(Ctx);
     const [inp1, setInp1] = useState("");
     const [pass1, setPass1] = useState(""); 
     const [pass2, setPass2] = useState(""); 
@@ -23,16 +25,14 @@ export default ({changeAuth, api, close, setToken}) => {
             email: inp1,
             password: pass1
         }
-        console.log(body);
         api.signUp(body)
             .then(res => res.json())
             .then(data =>{
-                console.log(data);
                 if(!data.err) {
                     api.signIn(body)
                         .then(res => res.json())
                         .then(data => {
-                                localStorage.setItem("user", data.data.name);
+                                localStorage.setItem("user", JSON.stringify(data.data));
                                 localStorage.setItem("token", data.token);
                                 setToken(data.token);
                         })
@@ -41,7 +41,7 @@ export default ({changeAuth, api, close, setToken}) => {
                     setPass2("");
                     close(false);
                 } else {
-                    //Ошбика
+                    alert(data.message);
                 }
             })
     }

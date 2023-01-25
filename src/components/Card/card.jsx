@@ -1,6 +1,8 @@
 import React from "react";
 import "./card.css";
 
+
+
 export default ({text, price, pictures, wight}) => {
     return <div className="card">
         <div className="card-img-box">
@@ -17,5 +19,11 @@ export default ({text, price, pictures, wight}) => {
                 : <i className="fa-regular fa-heart"></i>
             } */}
         </span>
+
+     
+
+
+
     </div>
+    
 }

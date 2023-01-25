@@ -22,16 +22,20 @@ h1 {
 .container {
     min-height: 100vh;
 }
-.container>*:not(header, .container-banner, footer) {
+/* .container>*:not(header, .container-banner, footer) {
     max-width: 980px;
     margin-left: auto;
     margin-right: auto;
+}
+main.container-banner {
+    padding-left: calc(50% - 600px);
+    padding-right: calc(50% - 600px);
 }
 
 header, .container-banner, footer {
     padding-left: calc(50% - 600px);
     padding-right: calc(50% - 600px);
-}
+} */
 
 .cards {
     display: grid;
@@ -40,22 +44,26 @@ header, .container-banner, footer {
 }
 
 @media (max-width: 1260px) {
-    .container>* {
+    /* .container>* {
         padding-left: 30px;
         padding-right: 30px;
-    }
+    } */
     .cards {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 }
 
-@media (max-width: 640px) {
+/* @media (max-width: 640px) {
     .container>* {
         padding-left: 10px;
         padding-right: 10px;
     }
-}
+} */
 .container-banner {
+    background: rgb(255,194,46);
+    background: linear-gradient(90deg, rgba(255,194,46,1) 30%, rgba(240,149,21,1) 100%);
+}
+.home-container {
     background: rgb(255,194,46);
     background: linear-gradient(90deg, rgba(255,194,46,1) 30%, rgba(240,149,21,1) 100%);
 }
