@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/dog-food/static/css/main.00d03a81.css",
-    "main.js": "/dog-food/static/js/main.798c26ce.js",
+    "main.css": "/dog-food/static/css/main.44a9ee1c.css",
+    "main.js": "/dog-food/static/js/main.6dff38cc.js",
     "static/media/banner-dog.png": "/dog-food/static/media/banner-dog.5fe5b595b49966aff301.png",
     "static/media/logo_min.svg": "/dog-food/static/media/logo_min.11e76a78dc5e393c9fa1.svg",
     "index.html": "/dog-food/index.html",
     "static/media/Menu.svg": "/dog-food/static/media/Menu.ea7965735a7b63d8532af91c380e5f15.svg",
     "static/media/xmark-solid.svg": "/dog-food/static/media/xmark-solid.60cf68c83c1745a9a5a3497035f6101d.svg",
     "static/media/magnifying-glass-solid.svg": "/dog-food/static/media/magnifying-glass-solid.06e310dbfbf3ab21da478aef6c037c14.svg",
-    "main.00d03a81.css.map": "/dog-food/static/css/main.00d03a81.css.map",
-    "main.798c26ce.js.map": "/dog-food/static/js/main.798c26ce.js.map"
+    "main.44a9ee1c.css.map": "/dog-food/static/css/main.44a9ee1c.css.map",
+    "main.6dff38cc.js.map": "/dog-food/static/js/main.6dff38cc.js.map"
   },
   "entrypoints": [
-    "static/css/main.00d03a81.css",
-    "static/js/main.798c26ce.js"
+    "static/css/main.44a9ee1c.css",
+    "static/js/main.6dff38cc.js"
   ]
 }
