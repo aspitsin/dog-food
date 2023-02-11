@@ -1,36 +1,39 @@
-import React from "react";
-import Card from "../components/Card/card";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import Pagination from "../components/Pagination";
+import Card from "../components/Card/card";
+import Pagination from "../components/Pagination/pagination";
 import usePagination from "../hooks/usePagination";
-import { Container } from "@mui/material";
+import { Container, Box, Button, Typography } from "@mui/material";
 
-export default ({goods, searchData}) => {
-    const clearSearch = () =>{
-        searchData("");
-    }
-    const paginate = usePagination(searchData, 12);
-    
-    return <>
-    <Container>
-    {goods.length > 0
-        ? <>
-            <h1>Каталог товаров</h1>
-            <Pagination hook={paginate}/>
-                <div className="cards">
-                    {paginate.setPageData().map((el, i ) => <Link to={`/catalog/${el._id}`}>
-                        <Card key={"card_" + i} text={el.name} price={el.price} pictures={el.pictures} wight={el.wight}/>
-                            </Link>
-                     )}
-                </div>
-        </>
-        :
-        <>
-        <p>Товар не найден</p>
-        <Link to="/" onClick={clearSearch}>На главную</Link>
-        </>
-    }
+import Ctx from "../Ctx";
 
-    </Container>
-  </>
+export default ({goods}) => {
+	const {searchData} = useContext(Ctx);
+
+	const clearSearch = () =>{
+		searchData("");
+	}
+	const paginate = usePagination(searchData, 12);
+
+	return <Container>
+	{goods.length > 0
+		? <>
+			<Typography variant="h4" component="h1" sx={{py: 2}}>Каталог товаров</Typography>
+			<Pagination hook={paginate}/>
+				<div className="cards">
+					{paginate.setPageData().map((el, i ) => <Link to={`/catalog/${el._id}`}>
+						<Card key={"card_" + i} text={el.name} price={el.price} discount={el.discount} pictures={el.pictures} wight={el.wight} likes={el.likes} _id={el._id}/>
+							</Link>
+					 )}
+				</div>
+		</>
+		:
+		<>
+			<Box sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
+				<Typography variant="subtitle" component="p" >Товар не найден</Typography>
+				<Button component={Link}  onClick={clearSearch} to="/">На главную</Button>
+			</Box>
+		</>
+	}
+	</Container>
 }

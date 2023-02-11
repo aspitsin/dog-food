@@ -9,6 +9,9 @@
     justify-content: center;
     align-items: center;
 }
+.menu-active {
+    display: flex;
+}
 .modal {
     position: relative;
     width: 300px;

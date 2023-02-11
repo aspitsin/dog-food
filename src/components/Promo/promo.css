@@ -1,0 +1,52 @@
+.promo {
+    padding: 20px 0;
+}
+
+.promo-small {
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.promo-block {
+    max-height: 200px;
+    min-height: 150px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #2226;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+
+}
+
+.promo-small .promo-block {
+    width: 100%;
+}
+
+@media (max-width:720px) {
+    .promo-small {
+        display: grid;
+    }
+}
+
+.promo-right {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.promo-left {
+    position: relative;
+}
+
+.promo-big .promo-left img {
+    width: 300px;
+    position: absolute;
+    top: -20%;
+}
+
+.promo-small .promo-left img {
+    width: 300px;
+    position: absolute;;
+    top: -20%;
+}

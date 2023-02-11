@@ -1,116 +1,128 @@
 import React, {useState, useContext} from "react";
 import { useNavigate } from "react-router";
-import { TextField, MenuItem, Box, Button, Grid, Stack } from "@mui/material";
+import { useFormik } from "formik";
+import * as yup from 'yup';
+import { TextField, MenuItem, Box, Button, Grid, Stack, Container } from "@mui/material";
 
 import Ctx from "../Ctx";
 
-/*
-    Название товара
-    Цена
-    Количтво на складе
-    Вес
-    Скидка
-    Описание
-    Изображение
-*/
-
 export default () => {
-    const [name, setName] = useState("");
-    const [price, setPrice] = useState(100);
-    const [wight, setWight] = useState("");
-    const [stock, setStock] = useState(10);
-    const [discount, setDiscount] = useState(0);
-    const [description, setDescription] = useState("");
-    const [pictures, setPictures] = useState("");
-
     const {api, setGoods} = useContext(Ctx);
     const navigate = useNavigate();
-    const handler = (e) => {
-        e.preventDefault();
-        let body = {
-            name: name || "Название отсутствует",
-            price: price || 0,
-            wight: wight || "unknown",
-            stock: stock || 0,
-            description: description || "Тут скоро появится описание товара",
-            discount: discount,
-            pictures: pictures
-        }
-        api.addProduct(body)
+
+    const [picture, setPicture] = useState("");
+    
+    const validationSchema = yup.object({
+
+    })
+
+    const formik = useFormik({
+        initialValues: {
+          name: '',
+          price: '',
+          discount: '',
+          wight: '',
+          stock: '',
+          description: '',
+          pictures: '',
+        },
+        validationSchema: validationSchema,
+        onSubmit: values => {
+            setPicture(values.pictures);
+            console.log(values);
+            api.addProduct(values)
             .then(res => res.json())
             .then(data => {
                
                 if (!data.error) {
                     setGoods(prev => [...prev, data]);
-                    clear();
                     navigate(`/catalog/${data._id}`);
                 }
             })
-    }
-    const clear = (e) => {
-        setName("");
-        setPrice(100);
-        setWight("");
-        setDiscount(0);
-        setStock(10);
-        setDescription("");
-        setPictures("");
-    }
+      }});
+
     const numberProps = {
         step: 10,
         min: 0,
       };
+    
+    const discountValue = [0, 5, 10, 15, 20, 25]
+    
       
-    return <>
+    return <Container maxWidth="lg">
         <h1>Добавить товар</h1>
-        <Box component="form" onSubmit={handler} >
+        <Box component="form" onSubmit={formik.handleSubmit} >
         <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
                 <Stack spacing={1}>
                 <TextField
+                    id="name"
+                    name="name"
                     label="Название товара"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    error={formik.touched.name && Boolean(formik.errors.name)}
+                    helperText={formik.touched.name && formik.errors.name}
                 />
                 <TextField
+                    id="price"
+                    name="price"
                     type="number"
                     label="Цена"
-                    value={price}
-                    onChange={e => setPrice(e.target.value)}
+                    value={formik.values.price}
+                    onChange={formik.handleChange}
                     inputProps={numberProps}
+                    error={formik.touched.price && Boolean(formik.errors.price)}
+                    helperText={formik.touched.price && formik.errors.price}
                 />
                 <TextField
                     select
+                    id="discount"
+                    name="discount"
                     label="Скидка"
-                    value={discount}
-                    onChange={e => setDiscount(e.target.value)}
+                    value={formik.values.discount}
+                    onChange={formik.handleChange}
                 >
-                    <MenuItem value={0}>Без скидки</MenuItem>
-                    <MenuItem value={5}>5%</MenuItem>
-                    <MenuItem value={10}>10%</MenuItem>
-                    <MenuItem value={15}>15%</MenuItem>
-                    <MenuItem value={20}>20%</MenuItem>
-                    <MenuItem value={25}>25%</MenuItem>
+                {discountValue.map((dValue) => (
+                    <MenuItem
+                    key={dValue}
+                    value={dValue}
+                    >
+                    {dValue}%
+                  </MenuItem>
+                ))}
                 </TextField>
                 <TextField
+                    id="wight"
+                    name="wight"
                     label="Вес"
                     placeholder="100 г"
-                    value={wight}
-                    onChange={e => setWight(e.target.value)}
+                    value={formik.values.wight}
+                    onChange={formik.handleChange}
+                    error={formik.touched.wight && Boolean(formik.errors.wight)}
+                    helperText={formik.touched.wight && formik.errors.wight}
                 />   
                 <TextField
+                    id="stock"
+                    name="stock"
                     type="number"
                     label="Количество"
-                    value={stock}
-                    onChange={e => setStock(e.target.value)}
+                    value={formik.values.stock}
+                    onChange={formik.handleChange}
                     inputProps={numberProps}
+                    error={formik.touched.stock && Boolean(formik.errors.stock)}
+                    helperText={formik.touched.stock && formik.errors.stock}
                 />
                 <TextField
+                    id="description"
+                    name="description"
                     label="Описание"
-                    value={description}
+                    value={formik.values.description}
                     multiline
                     minRows={4}
-                    onChange={e => setDescription(e.target.value)}
+                    onChange={formik.handleChange}
+                    error={formik.touched.description && Boolean(formik.errors.description)}
+                    helperText={formik.touched.description && formik.errors.description}
                 />
                 </Stack>
             </Grid>
@@ -120,17 +132,21 @@ export default () => {
                         height: 300,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
-                        backgroundImage: pictures ? 
-                            `url(${pictures})` : 
+                        backgroundImage: picture ? 
+                            `url(${picture})` : 
                             "url(https://www.chanchao.com.tw/images/default.jpg)",
                     }}>
 
                 </Box>
             <TextField
+                id="pictures"
+                name="pictures"
                 label="Изображение"
                 type="url"
-                value={pictures}
-                onChange={e => setPictures(e.target.value)}
+                value={formik.values.pictures}
+                onChange={formik.handleChange}
+                error={formik.touched.pictures && Boolean(formik.errors.pictures)}
+                helperText={formik.touched.pictures && formik.errors.pictures}
             />
             <Button variant="contained" type="submit">
                 Добавить
@@ -139,5 +155,5 @@ export default () => {
             </Grid>
         </Grid>
         </Box>
-    </>
+    </Container>
 }

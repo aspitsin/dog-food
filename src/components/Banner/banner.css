@@ -1,0 +1,31 @@
+.banner {
+    min-height: 350px;
+    display: flex;
+    max-width: 980px;
+    margin: auto;
+}
+.right-side {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.left-side {
+    background: url('../../pages/img/banner-dog.png') no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-size: contain;
+}
+@media (min-width: 768px) {
+    .container-banner {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    .left-side, .right-side {
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 50%;
+        max-width: 50%;
+    }
+}

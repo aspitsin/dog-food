@@ -1,57 +1,94 @@
 import React, { useState, useContext } from "react";
+import { useFormik } from "formik";
+import * as yup from 'yup';
+import{Button, TextField}  from '@mui/material';
 import Ctx from "../../Ctx";
 
-export default ({changeAuth, close}) => {
+export default ({setAuth, closeModal}) => {
     const {api, setToken} = useContext(Ctx);
-    const [inp1, setInp1] = useState("");
-    const [pass1, setPass1] = useState(""); 
-    const [pass2, setPass2] = useState(""); 
-    const [testPwd, setTestPwd] = useState(true);
 
-    const checkPwd = (val, type="main") => {
-        type === "main" ? setPass1(val) : setPass2(val);
-        if(val) {
-            if (type === "main"){
-                setTestPwd(val !== pass2);
-            } else {
-                setTestPwd(val !== pass1);
-            }
-        }
-    }
+    const validationSchema = yup.object({
+        email: yup.string('Введите e-mail').email('Invalid email address').required('Required'),
+        password: yup.string('Введите пароль').min(3, 'Password should be of minimum 3 characters length').required('Password is required'),
+        confirmPassword: yup.string()
+        .min(3)
+        .when("password", {
+          is: (val: any) => (val && val.length > 0 ? true : false),
+          then: yup.string().oneOf(
+            [yup.ref("password")],
+            "Both password need to be the same"
+          ),
+        })
+        .required("Confirm Password Required"),
+        // проверка пароля, пример из интернета
+    })
 
-    const sendForm = (e) => {
-        e.preventDefault();
-        const body = {
-            email: inp1,
-            password: pass1
-        }
-        api.signUp(body)
+    const formik = useFormik({
+        initialValues: {
+          email: '',
+          password: '',
+          confirmPassword: '',
+        },
+        validationSchema: validationSchema,
+        onSubmit: values => {
+            delete values.confirmPassword;
+            api.signUp(values)
             .then(res => res.json())
             .then(data =>{
                 if(!data.err) {
-                    api.signIn(body)
+                    api.signIn(values)
                         .then(res => res.json())
                         .then(data => {
                                 localStorage.setItem("user", JSON.stringify(data.data));
                                 localStorage.setItem("token", data.token);
                                 setToken(data.token);
                         })
-                    setInp1("");
-                    setPass1("");
-                    setPass2("");
-                    close(false);
+                    closeModal(false);
                 } else {
                     alert(data.message);
                 }
             })
-    }
+        },
+      });
 
-    return <form onSubmit={sendForm}>
-        <input type="email" placeholder="Введите почту" value={inp1} onChange={(e) => {setInp1(e.target.value)}}/>
-        <input type="password" placeholder="Пароль" value={pass1} onChange={(e) => {checkPwd(e.target.value)}}/>
-        <input type="password" placeholder="Повторите пароль" value={pass2} onChange={(e) => {checkPwd(e.target.value, "second")}}/>
-
-        <button className="btn" type="submit" disabled={testPwd}>Зарегистрироваться</button>
-        <button className="btn link" type="button" onClick={()=>{changeAuth(prev => !prev)}}>Войти</button>
-    </form>
+    return <form onSubmit={formik.handleSubmit}>
+            <TextField
+            fullWidth
+            id="email"
+            name="email"
+            label="Email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+            />
+            <TextField
+            fullWidth
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+            />
+            <TextField
+            fullWidth
+            id="confirmPassword"
+            name="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+            error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
+            helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+            />
+            <Button color="primary" variant="contained" fullWidth type="submit">
+                Зарегестрироваться
+            </Button>
+            <Button color="primary" variant="contained" fullWidth type="button" onClick={()=>{setAuth(prev => !prev)}}>
+                Войти
+            </Button>
+        </form>
 }

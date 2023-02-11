@@ -1,4 +1,4 @@
-header {
+/* header {
     padding-left: calc(50% - 600px);
     padding-right: calc(50% - 600px);
     padding-top: 10px;
@@ -8,7 +8,7 @@ header {
     justify-content: space-between;
     align-items: center;
     gap: 30px;
-}
+} */
 
 @media (max-width: 640px) {
     header {
@@ -16,12 +16,12 @@ header {
     }
 }
 
-.logo {
+/* .logo {
     width: 2.5em;
     height: 2.5em;
     background: url("./img/logo_min.svg") no-repeat;
     background-size: cover;
-}
+} */
 
 .menu {
     display: flex;

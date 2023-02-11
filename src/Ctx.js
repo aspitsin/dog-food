@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React from "react";
 
 export default React.createContext({
     user: {},
@@ -7,10 +7,12 @@ export default React.createContext({
     setToken: () => {},
     api: {},
     setApi: () => {},
-    modalActive: false,
-    setModalActive: () => {},
     goods: [],
     setGoods: () => {},
     searchData: [],
     setSearchData: () => {},
+    favorites: [],
+    setFavorites: () => {},
+    basket: [],
+    setBasket: () => {},
 });
