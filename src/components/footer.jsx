@@ -5,7 +5,7 @@ export default () => {
     const year = new Date().getFullYear();
 
     return (
-        <Box component="footer" sx={{bgcolor: 'primary.main', py: 2, mt:2}}>
+        <Box component="footer" sx={{bgcolor: 'primary.main', py: 2, mt: 'auto'}}>
             <Container>
                 <Typography variant="h6" align="center" gutterBottom>
                     ©{year}

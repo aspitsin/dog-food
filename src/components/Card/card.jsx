@@ -78,7 +78,7 @@ export default ({text, price, discount, pictures, wight, likes, _id}) => {
                 <Typography variant="body1">{text}</Typography>
 
             </CardContent>
-            <CardActions >
+            <CardActions  sx={{justifyContent: 'space-between'}}>
                 <Button size="small" variant="contained" sx={{borderRadius: '20px'}} onClick={addInBasket}>В корзину</Button>
                 <Button onClick={update}>
                     {

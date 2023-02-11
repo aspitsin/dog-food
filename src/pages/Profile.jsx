@@ -38,7 +38,7 @@ export default () => {
     }
 
     return  <Container maxWidth="lg">
-        <h1>Личный кабинет </h1>
+        <Typography variant="h4" component="h1" sx={{py: 2}}>Личный кабинет</Typography>
         <Typography>
             { !nameFlag 
                 ? <>

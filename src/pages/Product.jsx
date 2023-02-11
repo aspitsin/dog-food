@@ -38,7 +38,9 @@ export default () => {
             </Grid>
             <Grid item md={4} xs={12}>
                 <Box>
-                    <Typography variant="body1" sx={{textDecoration: 'line-through'}}>{Math.ceil(product.price * 100 / (100 - product.discount))}</Typography>
+                    {product.discount > 0 &&
+                        <Typography variant="body1" sx={{textDecoration: 'line-through'}}>{Math.ceil(product.price * 100 / (100 - product.discount))}</Typography>
+                    }
                     <Typography variant="h4" color="red" fontWeight="bold" >{product.price} ₽</Typography>
                     <Button variant="contained" sx={{borderRadius: 20, mt: 2, backgroundColor: 'warning.light'}}>В корзину</Button>
                     <Paper elevation={0} sx={{p:2, mt: 2, display:'flex', gap: 2, bgcolor: 'grey.200'}}>

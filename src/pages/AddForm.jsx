@@ -2,7 +2,7 @@ import React, {useState, useContext} from "react";
 import { useNavigate } from "react-router";
 import { useFormik } from "formik";
 import * as yup from 'yup';
-import { TextField, MenuItem, Box, Button, Grid, Stack, Container } from "@mui/material";
+import { TextField, MenuItem, Box, Button, Grid, Stack, Container, Typography } from "@mui/material";
 
 import Ctx from "../Ctx";
 
@@ -50,7 +50,7 @@ export default () => {
     
       
     return <Container maxWidth="lg">
-        <h1>Добавить товар</h1>
+        <Typography variant="h4" component="h1" sx={{py: 2}}>Добавить товар</Typography>
         <Box component="form" onSubmit={formik.handleSubmit} >
         <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
@@ -129,7 +129,7 @@ export default () => {
             <Grid item xs={12} md={6}>
             <Stack spacing={1}>
                 <Box sx={{
-                        height: 300,
+                        height: 312,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
                         backgroundImage: picture ? 
