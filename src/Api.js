@@ -4,7 +4,7 @@ class Api {
         this.group = "group-8";
         this.token = token;
     }
-    signUp(body) { // регистрация
+    signUp(body) { 
         body.group = this.group;
         return fetch(`${this.path}/signup`, {
             method: "POST",
@@ -65,10 +65,10 @@ class Api {
             body: JSON.stringify(body)
         })
     }
-    getUsers(groupId) {
-        return fetch(`${this.path}/v2/${groupId}`, {
-             headers: {
-                 authorization: `Bearer ${this.token}`
+    getUsers() {
+        return fetch(`${this.path}/users`, {
+            headers: {
+                "authorization": `Bearer ${this.token}`
             }
         })
     }
@@ -96,6 +96,24 @@ class Api {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(body)
+        })
+    }
+    addReview(id, body) {
+        return fetch(`${this.path}/products/review/${id}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            },
+            body: JSON.stringify(body)
+        })
+    }
+    delReview(id, idReview) {
+        return fetch(`${this.path}/products/review/${id}/${idReview}`, {
+            method: "DELETE",
+            headers: {
+                "authorization": `Bearer ${this.token}`
+            }
         })
     }
 }

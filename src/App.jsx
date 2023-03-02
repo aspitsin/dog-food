@@ -52,7 +52,7 @@ const App = () =>{
 	const [goods, setGoods] = useState([]);
 	const [searchData, setSearchData] = useState(goods);
 	const [favorites, setFavorites] = useState([]);
-	const [authors, setAuthors] = useState([]);
+	const [users, setUsers] =useState ([]);
 	const [basket, setBasket] = useState(localStorage.getItem("basket") ? JSON.parse(localStorage.getItem("basket")) : []);
 
 	useEffect(() => {
@@ -66,7 +66,7 @@ const App = () =>{
             api.getUsers()
                 .then(res => res.json())
                 .then(data => {
-                    setAuthors(data);
+                    setUsers(data);
                 })
         }
     }, [])
@@ -128,8 +128,8 @@ const App = () =>{
 			setFavorites: setFavorites,
 			basket: basket,
 			setBasket: setBasket,
-			authors: authors,
-			setAuthors: setAuthors,
+			users: users,
+			setUsers: setUsers,
 		}}>
 	<div className="container">
 		<Header 
@@ -145,6 +145,7 @@ const App = () =>{
 				<Route path="/profile" element={<Profile />}></Route>
 				<Route path="/catalog/:id" element={<Product/>}></Route>
 				<Route path="/addForm" element={<AddForm/>}></Route>
+				<Route path="/addForm/:id" element={<AddForm/>}></Route>
 				<Route path="/favorites" element={<Favorites/>}></Route>
 				<Route path="/review/:id" element={<Review/>}></Route>
 				<Route path="/basket" element={<Basket/>}></Route>

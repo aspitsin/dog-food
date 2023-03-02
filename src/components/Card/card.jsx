@@ -21,7 +21,6 @@ export default ({text, price, discount, pictures, wight, likes, _id}) => {
             .then(data => {
                 setFavorites(prev => {
                     let arr = prev.filter(el => el._id === _id);
-                    console.log(arr)
                     return arr.length > 0 ? 
                         prev.filter(el => el._id !== _id) : 
                         [...prev, data]
@@ -48,7 +47,6 @@ export default ({text, price, discount, pictures, wight, likes, _id}) => {
         e.stopPropagation();
         setBasket(prev => {
             const test = prev.filter(el => el.id === _id)
-            console.log(test)
             if (test.length){
                 return prev.map(el => {
                     if (el.id === _id){

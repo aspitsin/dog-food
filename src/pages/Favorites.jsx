@@ -11,7 +11,7 @@ export default () => {
 	const {favorites} = useContext(Ctx);
 	const paginate = usePagination(favorites, 6);
 	
-	return <Container>
+	return <Container sx={{mb:1}}>
 		{favorites.length > 0
 			? <>
 				<Typography variant="h4" component="h1" sx={{py: 2}}>Каталог товаров</Typography>

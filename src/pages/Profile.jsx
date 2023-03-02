@@ -29,7 +29,6 @@ export default () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 setUser(data);
                 localStorage.setItem("user", JSON.stringify(data));
                 setNameFlag(false);
@@ -37,7 +36,7 @@ export default () => {
             });
     }
 
-    return  <Container maxWidth="lg">
+    return  <Container maxWidth="lg" sx={{mb:1}}>
         <Typography variant="h4" component="h1" sx={{py: 2}}>Личный кабинет</Typography>
         <Typography>
             { !nameFlag 

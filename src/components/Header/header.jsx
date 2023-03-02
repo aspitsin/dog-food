@@ -4,9 +4,7 @@ import "./header.css";
 import { Link, useNavigate } from "react-router-dom";
 import Ctx from "../../Ctx";
 
-import burger from "./img/Menu.svg"
-
-import { AppBar, Container, Toolbar, Box, Stack, IconButton, Button, Fab, Badge} from "@mui/material";
+import { AppBar, Container, Toolbar, Stack, IconButton, Button, Fab, Badge} from "@mui/material";
 
 import PetsIcon from '@mui/icons-material/Pets';
 import AddIcon from '@mui/icons-material/Add';
@@ -38,7 +36,7 @@ export default ({setModalActive}) => {
 		<Container maxWidth="lg">
 			 <Toolbar disableGutters sx={{justifyContent:"space-between"}}>
 					<Link to="/"><PetsIcon sx={{ mr: 1, ml: 1 }} /></Link>  
-					{user && <Search /> }
+					{user && user.name && <Search /> }
 					<Stack direction="row" sx={{display: {xs: 'none', md: 'flex'}, pl: 1}}>
 						{user && user.name && <Fab color="white" size="small" component={Link} to="/addForm">
 						<AddIcon />

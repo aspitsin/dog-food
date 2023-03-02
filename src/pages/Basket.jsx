@@ -18,7 +18,7 @@ const Basket = () => {
 		setGds(arr)
 	},[basket, goods])
 
-	return <Container maxWidth="lg">
+	return <Container maxWidth="lg" sx={{mb:1}}>
 		{ basket.length === 0 &&  gds.length === 0 &&
 			<Box sx={{display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center'}}>
 				<Typography variant="h4" component="p" >Корзина пуста</Typography>
@@ -49,7 +49,6 @@ const Basket = () => {
 				</Grid>
 				<Grid item xs={12} md={4}>
 					<Paper sx={{p: 4}}>
-						{console.log(gds)}
 						<Typography variant="h5" component="p">Ваша корзина</Typography>
 						<Box sx={{display:'flex', alignItems: 'center', justifyContent: 'space-between', py: 2}}>
 							<Typography>Товары ({basket.reduce((acc, el, i) => {

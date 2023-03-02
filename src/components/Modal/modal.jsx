@@ -16,7 +16,7 @@ export default ({modalActive, setModalActive}) => {
         <div className="modal">
             <button className="modal-close" onClick={()=>setModalActive(false)}>
                 <i className="fa fa-solid fa-xmark"></i></button>
-        <h2>{auth ? "Войти" : "Зарегестрироваться"}</h2>
+        <h2>{auth ? "Войти" : "Зарегистрироваться"}</h2>
         {auth 
             ? 
             <Login setAuth={setAuth}  closeModal={setModalActive} /> 
