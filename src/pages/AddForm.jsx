@@ -11,6 +11,16 @@ export default () => {
     const { api, setGoods } = useContext(Ctx);
     const navigate = useNavigate();
     const [picture, setPicture] = useState("");
+    const [product, setProduct] = useState({});
+
+    useEffect(() => {
+        if(id){api.getProduct(id)
+            .then(res => res.json())
+            .then(data => {
+                setProduct(data);
+            })}
+        
+    }, []);
 
     const validationSchema = yup.object({
 
@@ -18,13 +28,13 @@ export default () => {
 
     const formik = useFormik({
         initialValues: {
-            name: '',
-            price: '',
-            discount: '',
-            wight: '',
-            stock: '',
-            description: '',
-            pictures: '',
+            name: product.name ? product.name : '',
+            price: product.price ? product.price : '',
+            discount: product.discount ? product.discount : '',
+            wight: product.wight ? product.wight : '',
+            stock: product.stock ? product.stock : '',
+            description: product.description ? product.description : '',
+            pictures: product.pictures ? product.pictures : '',
         },
         validationSchema: validationSchema,
         onSubmit: values => {
@@ -32,7 +42,6 @@ export default () => {
             api.addProduct(values)
                 .then(res => res.json())
                 .then(data => {
-
                     if (!data.error) {
                         setGoods(prev => [...prev, data]);
                         navigate(`/catalog/${data._id}`);
